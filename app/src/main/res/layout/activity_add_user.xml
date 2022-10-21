@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    tools:context=".AddUserActivity">
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editname"
+        android:ems="12"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:hint="enter name"
+        android:inputType="text"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editbranch"
+        android:ems="12"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/editname"
+        android:hint="enter branch"
+        android:inputType="text"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editduration"
+        android:ems="12"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/editbranch"
+        android:hint="enter duration"
+        android:inputType="number"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/editsave"
+        android:layout_below="@+id/editduration"
+        android:text="Save" />
+
+
+</RelativeLayout>
