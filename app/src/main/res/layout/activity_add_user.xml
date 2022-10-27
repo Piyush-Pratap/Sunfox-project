@@ -45,5 +45,12 @@
         android:layout_below="@+id/editduration"
         android:text="Save" />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/editupdate"
+        android:layout_below="@+id/editsave"
+        android:text="Update" />
 
 </RelativeLayout>

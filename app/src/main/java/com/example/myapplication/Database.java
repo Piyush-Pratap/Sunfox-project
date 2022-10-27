@@ -19,7 +19,6 @@ public  abstract class Database extends RoomDatabase {
         }
         return instance;
     }
-
     public abstract Dao dao();
 
 }

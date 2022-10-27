@@ -22,9 +22,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    Button Adduser;
+    Button Adduser , editdelete;
     private UserListAdapter userListAdapter;
     RecyclerView recyclerView;
+    int id;
 /*
 
 */
@@ -44,7 +45,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
 
 
      private void initRecyclerView(){
@@ -75,18 +75,23 @@ public class MainActivity extends AppCompatActivity {
         super.onStart();
         initRecyclerView();
         loadUserList();
-        Toast.makeText(this, "On start call", Toast.LENGTH_SHORT).show();
-        /*recyclerView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(MainActivity.this,AddUserActivity.class);
-                startActivity(i);
-            }
-        });*/
+        /*if(getIntent().getExtras()!=null) {
+            id = Integer.parseInt(getIntent().getExtras().getString("id"));
+            editdelete = findViewById(R.id.editdelete);
+            editdelete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    deletedata(id);
+                    use
+                }
+            });
 
+        }*/
     }
 
-
-
+    /*private void deletedata(int id){
+        Database db = Database.getDB(this);
+        db.dao().delete(id);
+    }*/
 
  }

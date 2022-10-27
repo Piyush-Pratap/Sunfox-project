@@ -24,8 +24,9 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.MyView
     private Context context;
     private ArrayList<Model> userList;
     EditText editname, editbranch, editduration;
-    Button editsave;
+    Button editsave , editdelete;
     LinearLayout linearLayout;
+    int id;
 
 
     public UserListAdapter(Context context){
@@ -56,16 +57,24 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.MyView
         holder.rname.setText(this.userList.get(position).name);
         holder.rbranch.setText(this.userList.get(position).branch);
         holder.rduration.setText(this.userList.get(position).duration);
-
         holder.linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(context,AddUserActivity.class);
+                i.putExtra("id", String.valueOf(userList.get(position).id));
                 i.putExtra("rname",userList.get(position).name);
                 i.putExtra("rbranch",userList.get(position).branch);
                 i.putExtra("rduration",userList.get(position).duration);
                 context.startActivity(i);
 
+            }
+        });
+        holder.editdelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                deletedata(userList.get(position).id);
+                userList.remove(position);
+                notifyDataSetChanged();
             }
         });
 
@@ -85,6 +94,7 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.MyView
         TextView rduration;
         RecyclerView recyclerView ;
         LinearLayout linearLayout;
+        Button editdelete;
 
 
         public MyViewHolder(View view){
@@ -94,9 +104,13 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.MyView
              rduration = view.findViewById(R.id.rduration);
              recyclerView = view.findViewById(R.id.recid);
              linearLayout = view.findViewById(R.id.llrow);
+            editdelete = view.findViewById(R.id.editdelete);
         }
 
     }
-
+    private void deletedata(int id){
+        Database db = Database.getDB(context.getApplicationContext());
+        db.dao().delete(id);
+    }
 
 }

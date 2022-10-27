@@ -1,5 +1,6 @@
 package com.example.myapplication;
 
+
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,10 +10,11 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.room.Room;
 
 public class AddUserActivity extends AppCompatActivity {
     EditText editname, editbranch, editduration;
-    Button editsave;
+    Button editsave, editupdate;
     int id ;
 
 
@@ -26,6 +28,7 @@ public class AddUserActivity extends AppCompatActivity {
         editbranch = findViewById(R.id.editbranch);
         editduration = findViewById(R.id.editduration);
         editsave = findViewById(R.id.editsave);
+        editupdate = findViewById(R.id.editupdate);
 
         editsave.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,10 +54,10 @@ public class AddUserActivity extends AppCompatActivity {
                 editname.setText(getIntent().getExtras().getString("rname"));
                 editbranch.setText(getIntent().getExtras().getString("rbranch"));
                 editduration.setText(getIntent().getExtras().getString("rduration"));
-                editsave.setText("Update");
-                editsave.setOnClickListener(new View.OnClickListener() {
+                editupdate.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        id = Integer.parseInt(getIntent().getExtras().getString("id"));
                         String name = editname.getText().toString();
                         String branch = editbranch.getText().toString();
                         String duration = editduration.getText().toString();
@@ -62,7 +65,7 @@ public class AddUserActivity extends AppCompatActivity {
                             Toast.makeText(AddUserActivity.this, "Please enter all the fields", Toast.LENGTH_SHORT).show();
                             return;
                         }
-                        upadateUser(name, branch, duration);
+                        updateUser(name,branch,duration,id);
                     }
                 });
             }
@@ -83,16 +86,12 @@ public class AddUserActivity extends AppCompatActivity {
 
     }
 
-    public void upadateUser(String name, String branch, String duration){
-           Database db = Database.getDB(this);
-           Model model = new Model(name,branch,duration);
-           model.name = name;
-           model.branch = branch;
-           model.duration = duration;
-           db.dao().update(model);
-           finish();
-
+    private void updateUser(String name, String branch, String duration, int id) {
+        Database db = Database.getDB(this);
+        db.dao().update(name, branch,duration,id);
+        finish();
     }
+
 
     public void saveNewUser(String name, String branch, String duration){
         Database db = Database.getDB(this);

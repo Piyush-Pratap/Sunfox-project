@@ -13,11 +13,11 @@ public interface Dao {
         @Insert
         void insert(Model model);
 
-        @Update
-        void update(Model model);
+        @Query("UPDATE table_details SET order_name = :name, order_branch = :branch, order_duration = :duration WHERE order_id = :id")
+        void update(String name, String branch, String duration, int id);
 
-        @Delete
-        void delete(Model model);
+        @Query("Delete from table_details where order_id = :id")
+        void delete(int id);
 
         @Query("DELETE FROM table_details")
         void deleteAlldetails();
